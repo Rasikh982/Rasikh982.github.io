@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rasikh — BSAI Student &amp; ML Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1419;
+    --surface:#161C25;
+    --surface-2:#1D2530;
+    --line:#28303C;
+    --text:#E8EAED;
+    --muted:#8B95A1;
+    --amber:#F2B84B;
+    --blue:#5FA8D3;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--amber);color:#0F1419;}
+
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(15,20,25,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;}
+  .logo{font-family:var(--mono);font-weight:700;font-size:15px;color:var(--amber);}
+  .logo span{color:var(--muted);}
+  .navlinks{display:flex;gap:28px;font-family:var(--mono);font-size:13px;color:var(--muted);}
+  .navlinks a:hover{color:var(--text);}
+
+  /* HERO */
+  header.hero{padding:80px 0 60px;}
+  .prompt-line{font-family:var(--mono);color:var(--blue);font-size:14px;margin-bottom:14px;}
+  .prompt-line .cursor{display:inline-block;width:8px;height:16px;background:var(--amber);margin-left:4px;vertical-align:middle;animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0;}}
+  h1{
+    font-family:var(--mono);
+    font-size:clamp(32px,6vw,52px);
+    font-weight:800;
+    letter-spacing:-0.02em;
+    line-height:1.15;
+    margin-bottom:16px;
+  }
+  h1 .accent{color:var(--amber);}
+  .tagline{font-size:17px;color:var(--muted);max-width:520px;margin-bottom:28px;}
+  .stack-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px;}
+  .tag{
+    font-family:var(--mono);font-size:12px;
+    padding:5px 10px;border:1px solid var(--line);
+    border-radius:4px;color:var(--muted);
+    background:var(--surface);
+  }
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:13px;font-weight:500;
+    padding:11px 18px;border-radius:5px;
+    border:1px solid var(--line);
+    transition:all .15s ease;
+  }
+  .btn.primary{background:var(--amber);color:#171308;border-color:var(--amber);}
+  .btn.primary:hover{background:#ffc966;}
+  .btn.ghost:hover{border-color:var(--blue);color:var(--blue);}
+
+  /* SECTION HEADERS */
+  section{padding:56px 0;border-top:1px solid var(--line);}
+  .sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:28px;}
+  .sec-head .num{font-family:var(--mono);color:var(--muted);font-size:13px;}
+  .sec-head h2{font-family:var(--mono);font-size:20px;font-weight:700;}
+  .sec-sub{color:var(--muted);font-size:14px;margin-top:-16px;margin-bottom:28px;max-width:560px;}
+
+  /* GIT LOG PROJECTS */
+  .commit{
+    display:grid;
+    grid-template-columns:90px 1fr;
+    gap:18px;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .commit:last-child{border-bottom:none;}
+  .commit .hash{font-family:var(--mono);color:var(--blue);font-size:13px;padding-top:2px;}
+  .commit-body h3{font-size:16px;font-weight:600;margin-bottom:6px;}
+  .commit-body p{color:var(--muted);font-size:14px;margin-bottom:10px;}
+  .commit-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  .chip{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line);padding:3px 8px;border-radius:3px;}
+  .commit-links{margin-left:auto;display:flex;gap:14px;}
+  .commit-links a{font-family:var(--mono);font-size:12px;color:var(--amber);}
+  .commit-links a:hover{text-decoration:underline;}
+  @media (max-width:600px){
+    .commit{grid-template-columns:1fr;gap:6px;}
+    .commit-meta{margin-top:4px;}
+    .commit-links{margin-left:0;margin-top:8px;}
+  }
+
+  /* SKILLS */
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;}
+  .skill-card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:6px;padding:14px 16px;
+  }
+  .skill-card .k{font-family:var(--mono);font-size:12px;color:var(--muted);display:block;margin-bottom:4px;}
+  .skill-card .v{font-size:14px;font-weight:500;}
+
+  /* CERTS */
+  .cert-list{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;}
+  .cert-item{
+    font-size:13px;color:var(--text);
+    padding:10px 0;border-bottom:1px dashed var(--line);
+    display:flex;gap:8px;align-items:flex-start;
+  }
+  .cert-item::before{content:'✓';color:var(--amber);font-family:var(--mono);font-weight:700;}
+  @media (max-width:640px){.cert-list{grid-template-columns:1fr;}}
+  .cert-note{color:var(--muted);font-size:13px;margin-top:16px;}
+
+  /* CONTACT */
+  .contact-card{
+    background:var(--surface);border:1px solid var(--line);
+    border-radius:8px;padding:32px;
+    display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center;
+  }
+  .contact-links{display:flex;gap:20px;flex-wrap:wrap;}
+  .contact-links a{font-family:var(--mono);font-size:14px;color:var(--blue);}
+  .contact-links a:hover{color:var(--amber);}
+
+  footer{padding:32px 0 60px;color:var(--muted);font-size:12px;font-family:var(--mono);text-align:center;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo">rasikh<span>@</span>portfolio</div>
+    <div class="navlinks">
+      <a href="#projects">projects</a>
+      <a href="#skills">skills</a>
+      <a href="#certs">certs</a>
+      <a href="#contact">contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="prompt-line">$ whoami<span class="cursor"></span></div>
+    <h1>Rasikh — building in<br><span class="accent">AI &amp; Machine Learning</span></h1>
+    <p class="tagline">BSAI student at IBADAT International University, Islamabad. Currently juggling three ML/AI internships at once and shipping projects in public.</p>
+    <div class="stack-tags">
+      <span class="tag">Python</span>
+      <span class="tag">Machine Learning</span>
+      <span class="tag">Data Structures</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">Git / GitHub</span>
+    </div>
+    <div class="cta-row">
+      <a class="btn primary" href="https://github.com/Rasikh982" target="_blank">View GitHub →</a>
+      <a class="btn ghost" href="#projects">See projects</a>
+    </div>
+  </div>
+</header>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">01</span><h2>project log</h2></div>
+    <p class="sec-sub">A running log of what's shipped — like a git history, but for the portfolio.</p>
+
+    <div class="commit">
+      <div class="hash">a3f9c1e</div>
+      <div class="commit-body">
+        <h3>Telco Customer Churn — EDA &amp; Dashboard</h3>
+        <p>Exploratory data analysis on customer churn data, deployed as an interactive Streamlit app for the ML internship.</p>
+        <div class="commit-meta">
+          <span class="chip">pandas</span><span class="chip">matplotlib</span><span class="chip">streamlit</span>
+          <div class="commit-links">
+            <a href="https://ml-internship-task-1.streamlit.app" target="_blank">live app</a>
+            <a href="https://github.com/Rasikh982/ML-Internship-Tasks" target="_blank">code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="hash">7d2b8f4</div>
+      <div class="commit-body">
+        <h3>Rule-Based AI Chatbot</h3>
+        <p>A conversational chatbot built on pattern-matching logic, submitted as part of the DecodeLabs AI track.</p>
+        <div class="commit-meta">
+          <span class="chip">Python</span>
+          <div class="commit-links">
+            <a href="https://github.com/Rasikh982/rule-based-ai-chatbot" target="_blank">code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="hash">4e1a0c9</div>
+      <div class="commit-body">
+        <h3>To-Do List Manager</h3>
+        <p>A command-line task manager covering CRUD operations, built for the DecodeLabs Python track.</p>
+        <div class="commit-meta">
+          <span class="chip">Python</span>
+          <div class="commit-links">
+            <a href="https://github.com/Rasikh982/todo-list-python" target="_blank">code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="hash">9c6f3d2</div>
+      <div class="commit-body">
+        <h3>Expense Tracker</h3>
+        <p>A simple script to log and categorize personal expenses — part of an early portfolio-building sprint.</p>
+        <div class="commit-meta">
+          <span class="chip">Python</span>
+          <div class="commit-links">
+            <a href="https://github.com/Rasikh982" target="_blank">code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="hash">1b8e7a5</div>
+      <div class="commit-body">
+        <h3>Random Password Generator</h3>
+        <p>A configurable password generator supporting custom length and character sets.</p>
+        <div class="commit-meta">
+          <span class="chip">Python</span>
+          <div class="commit-links">
+            <a href="https://github.com/Rasikh982" target="_blank">code</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="hash">0f4d9b1</div>
+      <div class="commit-body">
+        <h3>AI-Based Career Counseling System</h3>
+        <p>A recommendation system using K-Means clustering and cosine similarity, built as a team academic project.</p>
+        <div class="commit-meta">
+          <span class="chip">scikit-learn</span><span class="chip">K-Means</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="commit">
+      <div class="hash">6a2c5e8</div>
+      <div class="commit-body">
+        <h3>Loan Approval Prediction System</h3>
+        <p>Final year project comparing Logistic Regression, Decision Tree, and SVM on a loan approval dataset.</p>
+        <div class="commit-meta">
+          <span class="chip">Logistic Regression</span><span class="chip">Decision Tree</span><span class="chip">SVM</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">02</span><h2>skills &amp; stack</h2></div>
+    <div class="skill-grid">
+      <div class="skill-card"><span class="k">Languages</span><span class="v">Python, x86 Assembly</span></div>
+      <div class="skill-card"><span class="k">ML / AI</span><span class="v">scikit-learn, ANN, CNN, NLP</span></div>
+      <div class="skill-card"><span class="k">Data</span><span class="v">Pandas, EDA, Data Structures</span></div>
+      <div class="skill-card"><span class="k">Tools</span><span class="v">Git, GitHub, Streamlit</span></div>
+      <div class="skill-card"><span class="k">Networks</span><span class="v">TCP/IP, Subnetting, Routing</span></div>
+      <div class="skill-card"><span class="k">Currently learning</span><span class="v">Price action trading</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">03</span><h2>certifications</h2></div>
+    <p class="sec-sub">20 Anthropic Academy certifications, completed via the FlyRank AI internship.</p>
+    <div class="cert-list">
+      <div class="cert-item">AI Fluency Framework &amp; Foundations</div>
+      <div class="cert-item">Claude 101</div>
+      <div class="cert-item">Introduction to Claude Cowork</div>
+      <div class="cert-item">AI Capabilities and Limitations</div>
+      <div class="cert-item">AI Fluency for Students</div>
+      <div class="cert-item">AI Fluency for Educators</div>
+      <div class="cert-item">AI Fluency for Small Business</div>
+      <div class="cert-item">AI Fluency for Non-profits</div>
+      <div class="cert-item">AI Fluency for Builders</div>
+      <div class="cert-item">Teaching the AI Fluency Framework</div>
+      <div class="cert-item">Claude Code 101</div>
+      <div class="cert-item">Claude Code in Action</div>
+      <div class="cert-item">Claude Platform 101</div>
+      <div class="cert-item">Building with the Claude API</div>
+      <div class="cert-item">Introduction to MCP</div>
+      <div class="cert-item">MCP Advanced Topics</div>
+      <div class="cert-item">Introduction to Agent Skills</div>
+      <div class="cert-item">Introduction to Subagents</div>
+      <div class="cert-item">Claude with Amazon Bedrock</div>
+      <div class="cert-item">Claude with Google Vertex AI</div>
+    </div>
+    <p class="cert-note">Plus: Cisco "Introduction to Modern AI" certificate.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head"><span class="num">04</span><h2>get in touch</h2></div>
+    <div class="contact-card">
+      <p style="color:var(--muted);font-size:14px;max-width:340px;">Open to ML/AI internship and collaboration opportunities.</p>
+      <div class="contact-links">
+        <a href="https://github.com/Rasikh982" target="_blank">GitHub</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Rasikh — built with intent, shipped with Python.</footer>
+
+</body>
+</html>
